@@ -18,7 +18,7 @@ popup.addEventListener('click', (event) => {
 
 let openButton = document.querySelector('.profile__button-edit')
 let popup = document.querySelector('.popup')
-let closeButton = popup.querySelector('.popap__button')
+let closeButton = popup.querySelector('.popup__button')
 
 
 let profileName = document.querySelector('.profile__name')
