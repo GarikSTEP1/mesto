@@ -1,0 +1,26 @@
+.form__field-two {
+	border: 0;
+	width: 100%;
+	box-sizing: border-box;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+	margin-top: 30px;
+	padding: 0 0 8px;
+	font-size: 14px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.form__field-two::placeholder{
+	color: rgba(0, 0, 0, 1);
+}
+.form__field-two:active{
+	outline: none;
+}
+.form__field-two:focus{
+	outline: none;
+}
+@media screen and (max-width: 898px) {
+	.form__field-two {
+		margin-top: 30px;
+	}
+}

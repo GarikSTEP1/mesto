@@ -1,0 +1,27 @@
+.profile__button-edit{
+	cursor: pointer;
+	width: 24px;
+	height: 24px;
+	background: url(../../../images/button-edit.svg) no-repeat;
+	background-position: 0 0;
+	background-size: cover;
+	border: none;
+	border-radius: 0;
+	/*border: 1px solid red;*/
+}
+.profile__button-edit:hover{
+	opacity: 0.6;
+}
+.profile__button-edit:active{
+	outline: none;
+}
+.profile__button-edit:focus{
+	outline: none;
+}
+@media screen and (max-width: 898px) {
+	.profile__button-edit {
+		width: 18px;
+		height: 18px;
+		background-size: cover;
+	}
+}

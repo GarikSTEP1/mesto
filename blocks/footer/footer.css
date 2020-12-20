@@ -1,0 +1,10 @@
+.footer{
+	/*border: 1px solid rgb(17, 1, 170);*/
+	max-width: 880px;
+	margin: 0 auto;
+}
+@media screen and (max-width: 898px) {
+	.footer {
+		padding-left: 19px;
+	}
+}
