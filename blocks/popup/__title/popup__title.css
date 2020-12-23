@@ -3,9 +3,11 @@
 	font-weight: 900;
 	color:rgba(0, 0, 0, 1);
 	margin: 0;
+	padding-bottom: 24px;
 }
 @media screen and (max-width: 898px) {
 	.popup__title {
 		font-size: 18px;
+		padding-bottom: 45px;
 	}
 }

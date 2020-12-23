@@ -2,3 +2,9 @@
 	padding-bottom: 41px;
 	margin-bottom: 40px;
 }
+@media screen and (max-width: 898px) {
+	.page__header {
+		padding-bottom: 31.6px;
+		margin-bottom: 42px;
+	}
+}
