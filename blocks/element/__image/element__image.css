@@ -1,4 +1,7 @@
 .element__image{
-	width: 100%;
-	border-radius: 10px 10px 0 0;
+	/*border: 1px solid yellow;*/
+	height: 282px;
+	width: 282px;
+	object-fit: cover;
+	object-position: center;
 }

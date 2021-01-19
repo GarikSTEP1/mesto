@@ -9,11 +9,11 @@
 .element__like:hover{
 	opacity: 0.5;
 }
-.element__like:active{
+/*.element__like:active{
 	opacity: 1;
 	background: url(../../../images/like_active.svg) no-repeat;
 	outline: none;
-}
+}*/
 .element__like:focus{
 	outline: none;
 }

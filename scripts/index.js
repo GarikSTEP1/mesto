@@ -1,51 +1,132 @@
-let openButton = document.querySelector('.profile__button-edit')
-let popup = document.querySelector('.popup')
-let closeButton = document.querySelector('.popup__button')
+const profileName = document.querySelector('.profile__name')
+const profileDirection = document.querySelector('.profile__direction')
 
-let profileName = document.querySelector('.profile__name')
-let profileDirection = document.querySelector('.profile__direction')
-let form = document.querySelector('.form')
-let formFieldName = form.querySelector('.form__field_type_name')
-let formFieldDirection = form.querySelector('.form__field_type_direction')
-let formSubmitButton = form.querySelector('.form__submit-button')
+const popupEditProfile = document.getElementById('popup-edit-profile')
+const popupAddCard = document.getElementById('popup-add-card')
+const popupImage = document.getElementById('popup-image')
 
-function handleFormOpen() {
-	formFieldName.value = profileName.textContent;
-	formFieldDirection.value = profileDirection.textContent;
-	popup.classList.add('popup_opened');
-}
+const closeBtnEditProfile = popupEditProfile.querySelector('.popup__button')
+const closeBtnAddCard = popupAddCard.querySelector('.popup__button')
+const closeBtnImage = popupImage.querySelector('.popup__button')
 
-openButton.addEventListener('click', handleFormOpen)
+closeBtnEditProfile.addEventListener('click', () => closePopup(popupEditProfile))
+closeBtnAddCard.addEventListener('click', () => closePopup(popupAddCard))
+closeBtnImage.addEventListener('click', () => closePopup(popupImage))
 
-function handleFormClose() {
-	popup.classList.remove('popup_opened')
-}
-
-closeButton.addEventListener('click', handleFormClose)
-
-popup.addEventListener('click', (event) => {
+popupEditProfile.addEventListener('click', (event) => {
 	if (event.target === event.currentTarget) {
-		popup.classList.remove('popup_opened')
+		closePopup(popupEditProfile)
+	}
+})
+popupAddCard.addEventListener('click', (event) => {
+	if (event.target === event.currentTarget) {
+		closePopup(popupAddCard)
+	}
+})
+popupImage.addEventListener('click', (event) => {
+	if (event.target === event.currentTarget) {
+		closePopup(popupImage)
 	}
 })
 
-/*function togglePopup() {
-	popup.classList.toggle('popup_opened')
-}
+const formEditProfile = popupEditProfile.querySelector('.form')
+const formAddCard = popupAddCard.querySelector('.form')
 
-openButton.addEventListener('click', togglePopup)
-closeButton.addEventListener('click', togglePopup)
-
-popup.addEventListener('click', (event) => {
-	if (event.target === event.currentTarget) {
-		togglePopup()
-	}
-})*/
-
-function handleFormSubmit(event) {
+formEditProfile.addEventListener('submit', (event) => {
 	event.preventDefault();
-	profileName.textContent = formFieldName.value;
-	profileDirection.textContent = formFieldDirection.value;
-	handleFormClose();
+
+	const popupFormFieldName = popupEditProfile.querySelector('.form__field_type_name')
+	const popupFormFieldDirection = popupEditProfile.querySelector('.form__field_type_direction')
+
+	profileName.textContent = popupFormFieldName.value;
+	profileDirection.textContent = popupFormFieldDirection.value;
+
+	closePopup(popupEditProfile);
+
+})
+formAddCard.addEventListener('submit', (event) => {
+	event.preventDefault();
+
+	const popupFormFieldPlace = popupAddCard.querySelector('.form__field_type_place')
+	const popupFormFieldLink = popupAddCard.querySelector('.form__field_type_link')
+
+	addCard(popupFormFieldPlace.value, popupFormFieldLink.value)
+
+	closePopup(popupAddCard);
+})
+
+const btnEditProfile = document.querySelector('.profile__button-edit')
+const btnAddCard = document.querySelector('.profile__button')
+
+btnEditProfile.addEventListener('click', () => {
+	const popupFormFieldName = popupEditProfile.querySelector('.form__field_type_name')
+	const popupFormFieldDirection = popupEditProfile.querySelector('.form__field_type_direction')
+
+	popupFormFieldName.value = profileName.textContent;
+	popupFormFieldDirection.value = profileDirection.textContent;
+
+	openPopup(popupEditProfile)
+})
+btnAddCard.addEventListener('click', () => openPopup(popupAddCard))
+
+function openPopup(popupEl) {
+	popupEl.classList.add('popup_opened')
 }
-form.addEventListener('submit', handleFormSubmit)
+
+function closePopup(popupEl) {
+	popupEl.classList.remove('popup_opened')
+}
+
+const initialCards = [
+	{
+		name: 'Архыз',
+		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+	},
+	{
+		name: 'Челябинская область',
+		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+	},
+	{
+		name: 'Иваново',
+		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+	},
+	{
+		name: 'Камчатка',
+		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+	},
+	{
+		name: 'Холмогорский район',
+		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+	},
+	{
+		name: 'Байкал',
+		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+	}
+];
+
+const cardTemplate = document.querySelector('#card').content;
+const elementsSection = document.querySelector('.elements');
+
+initialCards.reverse().forEach(function (item) {
+	addCard(item.name, item.link)
+});
+
+function addCard(text, src) {
+	const cardElement = cardTemplate.cloneNode(true);
+	cardElement.querySelector('.element__image').src = src;
+	cardElement.querySelector('.element__title').textContent = text;
+	cardElement.querySelector('.element__like').addEventListener('click', function (evt) {
+		evt.target.classList.toggle('element__like_active');
+	})
+	cardElement.querySelector('.element__trash').addEventListener('click', (event) => event.target.closest('.element').remove());
+	cardElement.querySelector('.element__image').addEventListener('click', () => {
+		 const img = popupImage.getElementsByTagName('img')[0]
+		 const p = popupImage.getElementsByTagName('p')[0]
+		 img.setAttribute('src', src)
+		 p.setAttribute('textContent', text)
+		 p.textContent = text
+		 openPopup(popupImage)
+	});
+	
+	elementsSection.prepend(cardElement);
+}
